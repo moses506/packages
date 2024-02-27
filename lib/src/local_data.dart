@@ -71,7 +71,7 @@ class LocalData {
 
   /// Get one element from the table [tableName] with the provided [id].
   /// If element with [id] doesn't exist, return null.
-  Future<Map<String, dynamic>?> getOne(String tableName, int id) async {
+  Future<Map<String, dynamic>?> getOne(String tableName, dynamic id) async {
     final List<Map<String, dynamic>> maps =
         await _database.query(tableName, where: 'id = ?', whereArgs: [id]);
     if (maps.isNotEmpty) {
