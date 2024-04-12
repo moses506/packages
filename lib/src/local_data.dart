@@ -114,6 +114,26 @@ class LocalData {
     return maps;
   }
 
+  /// Get [limit] elements from the table [tableName] where [column]
+  /// is like [value]. If [limit] is null, gets all elements from the
+  /// table [tableName].
+  Future<List<Map<String, dynamic>>> getWhereLike(
+    String tableName, {
+    required String column,
+    required String value,
+    int? limit,
+    String? orderBy,
+  }) async {
+    final List<Map<String, dynamic>> maps = await _database.query(
+      tableName,
+      where: '$column LIKE ?',
+      whereArgs: [value],
+      limit: limit,
+      orderBy: orderBy,
+    );
+    return maps;
+  }
+
   /// Delete one element from the table [tableName] with the provided [id].
   Future<int> deleteOne(String tableName, int id) async {
     return _database.delete(tableName, where: 'id = ?', whereArgs: [id]);
